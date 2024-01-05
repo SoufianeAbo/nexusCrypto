@@ -1,7 +1,7 @@
 <?php
 
 class CryptoController {
-    public function index() {
+    public function index($argument) {
         require_once '../app/models/Cryptocurrency.php';
         $cryptoModel = new Crypto();
 
@@ -9,6 +9,6 @@ class CryptoController {
         $cryptoData = $cryptoModel->getCryptoData($apiKey);
         $toptenData = $cryptoModel->getCryptoDataTop10($apiKey);
 
-        require_once '../app/views/pages/landing.php';
+        require_once "../app/views/pages/$argument.php";
     }
 }
