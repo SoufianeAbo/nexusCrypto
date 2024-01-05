@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+<nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 fixed z-50 w-screen">
   <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
     <a href="<?php echo URLROOT; ?>" class="flex items-center">
       <img src="https://cryptoz.iamabdus.com/v1.1/wp-content/uploads/2021/11/cryptoz-logo-1.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
