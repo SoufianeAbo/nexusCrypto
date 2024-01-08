@@ -17,8 +17,8 @@ require APPROOT . '/views/inc/navbar.php';
  ?> 
  </div>
 
-<main class="grid grid-cols-3 bg-gradient-to-tl from-[#10413f] to-[#1e2738] pt-16">
-<div class="col-span-3 justify-self-center w-[90%] my-12">
+<main class="grid grid-cols-1 lg:grid-cols-3 bg-gradient-to-tl from-[#10413f] to-[#1e2738] pt-16">
+<div class="col-span-1 lg:col-span-3 justify-self-center w-[90%] my-12">
     <div class="w-96 bg-gray-800 p-6 rounded-md shadow-md flex items-center justify-between mb-4 lg:mb-0 carousel carousel-center p-4 w-full space-x-8 bg-neutral mx-4 rounded-box">
         <?php foreach ($toptenData['data'] as $topten) {
             $name = $topten['name'];
