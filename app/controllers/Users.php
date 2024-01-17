@@ -1,4 +1,12 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../app/helpers/mail/src/Exception.php';
+require '../app/helpers/mail/src/PHPMailer.php';
+require '../app/helpers/mail/src/SMTP.php';
+
 class Users extends Controller
 {
     private $userModel;
@@ -22,7 +30,7 @@ class Users extends Controller
                 'DateOfBirth' => date('Y-m-d'),
                 'Email' => trim($_POST['Email']),
                 'PasswordHash' => $_POST['PasswordHash'],
-                'NexusID' => mt_rand(1, 99999999), 
+                'NexusID' => mt_rand(1, 99999999),
                 'first_name_err' => '',
                 'last_name_err' => '',
                 'DateOfBirth_err' => '',
@@ -68,7 +76,7 @@ class Users extends Controller
             }
 
             // Make sure errors are empty
-            if (empty(trim($data['email_err'])) && empty(trim($data['first_name_err'])) && empty(trim($data['last_name_err'])) && empty(trim($data['DateOfBirth_err']))  && empty(trim($data['password_err']))) {
+            if (empty(trim($data['email_err'])) && empty(trim($data['first_name_err'])) && empty(trim($data['last_name_err'])) && empty(trim($data['DateOfBirth_err'])) && empty(trim($data['password_err']))) {
                 // Validated
 
                 // Hash Password
@@ -202,44 +210,132 @@ class Users extends Controller
                 $data['password_err'] = 'Please enter password';
             }
 
-            // Check for user/email
-            $userExists = $this->userModel->findUserByEmail($data['Email']);
+            if (empty($data['email_err']) && empty($data['password_err'])) {
+                // Validated
+                $logedInUser = $this->userModel->login($data['email'], $data['password']);
+                if ($logedInUser) {
+                    $verificationCode = generateVerificationCode(6);
 
-            if ($userExists) {
-                // User found
-                // Send verification email and get the verification code
-                $verificationCodeSent = $this->userModel->sendVerificationEmail($data['Email']);
+                    $mail = new PHPMailer(true);
 
-                if ($verificationCodeSent) {
-                    // Pass the verification code to the view
-                    $data['verificationCode'] = $verificationCodeSent;
 
-                    // Load view with verification code input
-                    $this->view('users/verify', $data);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'beghiba@gmail.com';
+                    $mail->Password = 'xkyp uwrs fmpo osyp';
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port = 465;
+                    $mail->setFrom('beghiba@gmail.com');
+                    $mail->addAddress($data['email']);
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Verification code';
+                    $mail->Body = $verificationCode;
+                    $mail->send();
+
+                    $_SESSION['codeV'] = $verificationCode;
+                    $this->createUserSession($logedInUser);
+
+                    redirect('users/verification_login');
+
+
+
+
                 } else {
-                    // Handle email sending error
-                    $data['email_err'] = 'Unable to send verification email. Please try again later.';
+                    $data['password_err'] = 'Invalid password';
                     $this->view('users/login', $data);
+
                 }
             } else {
-                // User not found, redirect to the registration page
-                $data['email_err'] = 'Invalid email or password';
-                redirect('users/register');
+                // Load view with errors
+                $this->view('users/login', $data);
             }
+        }
+        // Check for user/email
+        // $userExists = $this->userModel->findUserByEmail($data['Email']);
+
+        //     if ($userExists) {
+        //         // User found
+        //         // Send verification email and get the verification code
+        //         $verificationCodeSent = $this->userModel->sendVerificationEmail($data['Email']);
+
+        //         if ($verificationCodeSent) {
+        //             // Pass the verification code to the view
+        //             $data['verificationCode'] = $verificationCodeSent;
+
+        //             // Load view with verification code input
+        //             $this->view('users/verify', $data);
+        //         } else {
+        //             // Handle email sending error
+        //             $data['email_err'] = 'Unable to send verification email. Please try again later.';
+        //             $this->view('users/login', $data);
+        //         }
+        //     } else {
+        //         // User not found, redirect to the registration page
+        //         $data['email_err'] = 'Invalid email or password';
+        //         redirect('users/register');
+        //     }
+
+        // } else {
+        //     // Init data
+        //     $data = [
+        //         'Email' => '',
+        //         'PasswordHash' => '',
+        //         'email_err' => '',
+        //         'password_err' => '',
+        //     ];
+
+        // Load view
+        //     $this->view('users/login', $data);
+        // }
+    }
+
+    
+    public function verification_login(){
+        
+        // if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST["submit"])){
+            
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+          
+            $data =[
+              'verification' => trim($_POST['verification']),
+              'verif_err'=>'',
+   
+            ];
+            
+            $veri = '/^\d{6}$/';
+
+            if(empty($data['verification'])){
+                $data['verif_err'] = ' Veuillez entrer le code';
+            }elseif(!preg_match($veri,$data['verification'])){
+                $data['verif_err'] = 'Veuillez entrer le code valide (6 chiffre)';
+            }elseif($data['verification'] == $_SESSION['codeV']) {
+                $_SESSION['conn']= "oui";
+                redirect('coins/index');                
+            }else {
+                $data['verif_err'] ='code invalide';           
+            }          
+            $this->view('pages/verification_login', $data);
+
 
         } else {
             // Init data
-            $data = [
-                'Email' => '',
-                'PasswordHash' => '',
-                'email_err' => '',
-                'password_err' => '',
+            $data =[    
+            'verification' => '', 
+            'verif_err'=>'',       
             ];
 
-            // Load view
-            $this->view('users/login', $data);
+            $this->view('pages/verification_login', $data);
         }
     }
+
+  
+    public function validation(){
+        $this->view('users/validation');
+  
+      }
 
     public function createUserSession($user)
     {
@@ -260,32 +356,32 @@ class Users extends Controller
         redirect('users/login');
     }
 
-    public function verify()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Process form
-            $verificationCode = trim($_POST['verificationCode']);
+    // public function verify()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         // Process form
+    //         $verificationCode = trim($_POST['verificationCode']);
 
-            // Check if the verification code is valid
-            $user = $this->userModel->verifyUserByCode($verificationCode);
+    //         // Check if the verification code is valid
+    //         $user = $this->userModel->verifyUserByCode($verificationCode);
 
-            if ($user) {
-                // // Update user status as verified (optional)
-                // $this->userModel->updateVerificationStatus($user->id);
+    //         if ($user) {
+    //             // // Update user status as verified (optional)
+    //             // $this->userModel->updateVerificationStatus($user->id);
 
-                // Create user session
-                $this->createUserSession($user);
+    //             // Create user session
+    //             $this->createUserSession($user);
 
-                flash('verify_success', 'Your email has been verified. Welcome!');
-                redirect('pages/index'); // Redirect to the dashboard or any other page
-            } else {
-                flash('verify_error', 'Invalid verification code. Please try again.');
-                $this->view('users/verify'); // Reload the verification page with an error message
-            }
-        } else {
-            // Redirect to the login page if accessed directly without a POST request
-            redirect('users/login');
-        }
-    }
-   
+    //             flash('verify_success', 'Your email has been verified. Welcome!');
+    //             redirect('pages/index'); // Redirect to the dashboard or any other page
+    //         } else {
+    //             flash('verify_error', 'Invalid verification code. Please try again.');
+    //             $this->view('users/verify'); // Reload the verification page with an error message
+    //         }
+    //     } else {
+    //         // Redirect to the login page if accessed directly without a POST request
+    //         redirect('users/login');
+    //     }
+    // }
+
 }

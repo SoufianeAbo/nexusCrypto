@@ -129,61 +129,61 @@ class User
     return $this->db->execute();
 }
 
-private function configureMailer(PHPMailer $mail, $email) {
-    try {
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'eytchcreations@gmail.com';
-        $mail->Password = 'hibabeghdi0658144394';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+// private function configureMailer(PHPMailer $mail, $email) {
+//     try {
+//         $mail->isSMTP();
+//         $mail->Host = 'smtp.gmail.com';
+//         $mail->SMTPAuth = true;
+//         $mail->Username = 'eytchcreations@gmail.com';
+//         $mail->Password = 'hibabeghdi0658144394';
+//         $mail->SMTPSecure = 'tls';
+//         $mail->Port = 587;
 
-        $mail->setFrom('hibabeg@gmail.com', 'BEGHDI');
-        $mail->addAddress($email);
-        $mail->isHTML(true);
+//         $mail->setFrom('hibabeg@gmail.com', 'BEGHDI');
+//         $mail->addAddress($email);
+//         $mail->isHTML(true);
 
-        return true;
-    } catch (Exception $e) {
-        // Handle exceptions (log or display an error message)
-        return false;
-    }
-}
+//         return true;
+//     } catch (Exception $e) {
+//         // Handle exceptions (log or display an error message)
+//         return false;
+//     }
+// }
 
-public function sendVerificationEmail($email) {
-    $mail = new PHPMailer(true);
+// public function sendVerificationEmail($email) {
+//     $mail = new PHPMailer(true);
 
-    if ($this->configureMailer($mail, $email)) {
-        try {
-            // Générer un code de vérification
-            $verificationCode = mt_rand(100000, 999999);
+//     if ($this->configureMailer($mail, $email)) {
+//         try {
+//             // Générer un code de vérification
+//             $verificationCode = mt_rand(100000, 999999);
 
-            // Sauvegarder le code dans la base de données
-            $this->saveVerificationCode($email, $verificationCode);
+//             // Sauvegarder le code dans la base de données
+//             $this->saveVerificationCode($email, $verificationCode);
 
-            // Configurer le courriel
-            $mail->Subject = 'Verification Email';
-            $mail->Body = 'Your verification code is: ' . $verificationCode;
+//             // Configurer le courriel
+//             $mail->Subject = 'Verification Email';
+//             $mail->Body = 'Your verification code is: ' . $verificationCode;
 
-            // Envoyer le courriel
-            $mail->send();
+//             // Envoyer le courriel
+//             $mail->send();
 
-            $mail->SMTPDebug = 1;
+//             $mail->SMTPDebug = 1;
 
-          //   if (!$mail->send()) {
-          //     throw new Exception('Error sending verification email: ' . $mail->ErrorInfo);
-          // }
+//           //   if (!$mail->send()) {
+//           //     throw new Exception('Error sending verification email: ' . $mail->ErrorInfo);
+//           // }
 
-            return $verificationCode; // Retourner le code de vérification
-        } catch (Exception $e) {
-            // Handle exceptions (log or display an error message)
-            error_log('Error sending verification email: ' . $e->getMessage());
-            return false;
-        }
-    }
+//             return $verificationCode; // Retourner le code de vérification
+//         } catch (Exception $e) {
+//             // Handle exceptions (log or display an error message)
+//             error_log('Error sending verification email: ' . $e->getMessage());
+//             return false;
+//         }
+//     }
 
-    return false;
-}
+//     return false;
+// }
 
 public function verifyUserByCode($verificationCode) {
     // Query the database to find the user by verification code
