@@ -1,0 +1,40 @@
+
+UWeb:AvoidCommentedOutCodeCheck"Remove this commented out code.(Â—¶Íüÿÿÿÿ8íèö¤Î1
+ephp:S103"KSplit this 136 characters long line (which is greater than 120 authorized).(»œÖE8²éö¤Î1
+_php:S103"KSplit this 171 characters long line (which is greater than 120 authorized).(—Õ¡ª
+dphp:S103"KSplit this 480 characters long line (which is greater than 120 authorized).(€òéùşÿÿÿÿ
+_php:S103"KSplit this 487 characters long line (which is greater than 120 authorized).(Ó€Æ
+_php:S103"KSplit this 345 characters long line (which is greater than 120 authorized).(ô„ëé
+_php:S103"KSplit this 401 characters long line (which is greater than 120 authorized).(ô‰·Ë
+_php:S103"KSplit this 259 characters long line (which is greater than 120 authorized).(ì†›
+_php:S103"KSplit this 263 characters long line (which is greater than 120 authorized).(Ç…¦•
+_php:S103"KSplit this 139 characters long line (which is greater than 120 authorized).(òæ¬À
+_php:S103 "KSplit this 454 characters long line (which is greater than 120 authorized).(¡ø•ƒ
+^php:S103!"KSplit this 155 characters long line (which is greater than 120 authorized).(¾ãı?
+dphp:S103""KSplit this 139 characters long line (which is greater than 120 authorized).(ÁÏ™”ùÿÿÿÿ
+_php:S103#"KSplit this 155 characters long line (which is greater than 120 authorized).(ù»Î
+_php:S103$"KSplit this 139 characters long line (which is greater than 120 authorized).(Âóµâ
+dphp:S103%"KSplit this 267 characters long line (which is greater than 120 authorized).(Õ´ıäøÿÿÿÿ
+dphp:S103&"KSplit this 139 characters long line (which is greater than 120 authorized).(ê¿‚Üşÿÿÿÿ
+dphp:S103'"KSplit this 137 characters long line (which is greater than 120 authorized).(Íìä±ùÿÿÿÿ
+dphp:S103("KSplit this 139 characters long line (which is greater than 120 authorized).(¢Úà©úÿÿÿÿ
+dphp:S103)"KSplit this 138 characters long line (which is greater than 120 authorized).(‡µáŞşÿÿÿÿ
+_php:S103*"KSplit this 299 characters long line (which is greater than 120 authorized).(û‘øÊ
+dphp:S103+"KSplit this 301 characters long line (which is greater than 120 authorized).(á½³éùÿÿÿÿ
+_php:S103,"KSplit this 122 characters long line (which is greater than 120 authorized).(„Â’Ø
+_php:S103-"KSplit this 173 characters long line (which is greater than 120 authorized).(£¤òÄ
+dphp:S103."KSplit this 123 characters long line (which is greater than 120 authorized).( ˜ëıøÿÿÿÿ
+_php:S103/"KSplit this 233 characters long line (which is greater than 120 authorized).(ëóŸç
+dphp:S1031"KSplit this 798 characters long line (which is greater than 120 authorized).(×Î°İüÿÿÿÿ
+_php:S1032"KSplit this 483 characters long line (which is greater than 120 authorized).(Ñ²¢ô
+^php:S1033"KSplit this 257 characters long line (which is greater than 120 authorized).(ëŠÖ
+
+^php:S1034"KSplit this 379 characters long line (which is greater than 120 authorized).(˜Õ×e
+_php:S1035"KSplit this 476 characters long line (which is greater than 120 authorized).(„íÇæ
+_php:S103C"KSplit this 176 characters long line (which is greater than 120 authorized).(è×‘¾
+^php:S103D"KSplit this 304 characters long line (which is greater than 120 authorized).(‰¡Ûw
+dphp:S103M"KSplit this 175 characters long line (which is greater than 120 authorized).(ø¾é…ûÿÿÿÿ
+dphp:S103N"KSplit this 319 characters long line (which is greater than 120 authorized).(İ‰ØÇüÿÿÿÿ
+dphp:S103U"KSplit this 211 characters long line (which is greater than 120 authorized).(â‡‚™ùÿÿÿÿ
+kphp:S103V"KSplit this 178 characters long line (which is greater than 120 authorized).( ³Ççûÿÿÿÿ8›ù¤Î1
+@	php:S2003`"&Replace "require" with "require_once".(Å©ŞĞúÿÿÿÿ

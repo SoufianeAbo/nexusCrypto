@@ -1,0 +1,12 @@
+
+NWeb:AvoidCommentedOutCodeCheck"Remove this commented out code.(Â—¶Íüÿÿÿÿ
+^php:S103"KSplit this 136 characters long line (which is greater than 120 authorized).(»œÖE
+kphp:S103"KSplit this 149 characters long line (which is greater than 120 authorized).(ùëúåıÿÿÿÿ8±¬¤Î1
+kphp:S103"KSplit this 291 characters long line (which is greater than 120 authorized).(¦¯íğşÿÿÿÿ8±¬¤Î1
+kphp:S103"KSplit this 290 characters long line (which is greater than 120 authorized).(ùğ¥÷şÿÿÿÿ8±¬¤Î1
+kphp:S103"KSplit this 324 characters long line (which is greater than 120 authorized).(çğìÔùÿÿÿÿ8±¬¤Î1
+fphp:S103"KSplit this 306 characters long line (which is greater than 120 authorized).(èÀÅ„8±¬¤Î1
+kphp:S103""KSplit this 225 characters long line (which is greater than 120 authorized).(‚Êõûşÿÿÿÿ8±¬¤Î1
+kphp:S103*"KSplit this 222 characters long line (which is greater than 120 authorized).(½ÓçÁÿÿÿÿÿ8ú„·¤Î1
+fphp:S103-"KSplit this 386 characters long line (which is greater than 120 authorized).(ˆ¨¹•8Ğµ¤Î1
+kphp:S1030"KSplit this 386 characters long line (which is greater than 120 authorized).(ô˜úÈúÿÿÿÿ8Ğµ¤Î1
